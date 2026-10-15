@@ -1,1 +1,6 @@
-<Solution />
+<Solution>
+  <Project Path="DesignPatterns/DesignPatterns.csproj" Id="8c99bad1-590c-4396-a46b-cd4558d80ed2" />
+  <Project Path="Inheritance/Inheritance.csproj" Id="cd4dd89a-aaa6-4707-8bc7-bd85c319a204" />
+  <Project Path="LeetCode/LeetCode.csproj" Id="02cc204f-f3be-4e15-bee4-ab189a1d7cde" />
+  <Project Path="SRP/SRP.csproj" />
+</Solution>
