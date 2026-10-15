@@ -1,0 +1,91 @@
+classDiagram
+direction TB
+
+class Person {
+  +string PersonId
+  +string FullName
+  +string Phone
+  #Person(personId, fullName, phone)
+}
+class Member {
+  +int MaximumLoans
+  +decimal DiscountPercentage
+  +IReadOnlyList~Loan~ Loans
+  #Member(...)
+  +Loan BorrowItem(loanId, item, borrowDate)
+}
+class StudentMember
+class PremiumMember {
+  +int ReadingPoints
+}
+class Staff {
+  +DateTime HireDate
+  +decimal MonthlySalary
+  +decimal ResponsibilityAllowance
+  +decimal MonthlyPay
+  #Staff(...)
+  +void GiveRaise(percentage)
+}
+class Librarian {
+  +void ProcessReturn(loan, returnDate)
+  +void MarkItemLost(loan)
+}
+class Shelver {
+  +string Section
+  +void Reassign(newSection)
+}
+class HeadLibrarian {
+  +void ChangeLateFee(item, newBaseLateFee)
+  +void WithdrawItem(item)
+  +void RestoreItem(item)
+}
+class LibraryItem {
+  +string CatalogNumber
+  +string Title
+  +int LoanPeriodDays
+  +decimal LateFeeMultiplier
+  +decimal BaseLateFee
+  +bool IsWithdrawn
+  +bool IsOnLoan
+  #LibraryItem(...)
+  +decimal GetDailyLateFee()
+  +void SetBaseLateFee(newBaseLateFee)
+  +void Withdraw()
+  +void Restore()
+}
+class Book
+class DVD
+class Magazine
+class Loan {
+  +string LoanId
+  +DateTime BorrowDate
+  +DateTime DueDate
+  +Member Member
+  +LibraryItem Item
+  +LoanStatus Status
+  +DateTime ReturnDate
+  +decimal LateFee
+  +void Return(returnDate)
+  +void MarkAsLost()
+}
+class LoanStatus {
+  <<enumeration>>
+  Borrowed
+  Returned
+  Lost
+}
+
+Person <|-- Member
+Person <|-- Staff
+Member <|-- StudentMember
+Member <|-- PremiumMember
+Staff <|-- Librarian
+Staff <|-- Shelver
+Staff <|-- HeadLibrarian
+LibraryItem <|-- Book
+LibraryItem <|-- DVD
+LibraryItem <|-- Magazine
+
+Member "1" --> "0..*" Loan : loan history
+Loan "*" --> "1" LibraryItem : item
+Loan --> LoanStatus : status
